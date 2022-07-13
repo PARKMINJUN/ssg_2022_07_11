@@ -31,9 +31,12 @@ public class App {
     }
 
     private void write() {
+        int id = 1;
         System.out.printf("명언 : ");
         String content = sc.nextLine();
         System.out.printf("작가 : ");
         String author = sc.nextLine();
+
+        System.out.printf("%d번 명언이 등록되었습니다.\n", id);
     }
 }
