@@ -45,7 +45,14 @@ public class App {
     }
 
     private void list(){
-        System.out.println(wiseSayings);
+        System.out.println("번호 / 작가 / 명언\n");
+        System.out.println("----------------------");
+
+        for (int i = wiseSayings.size() -1; i >= 0; i--) {
+            WiseSaying wiseSaying = wiseSayings.get(i);
+            // System.out.println(wiseSayings);
+            System.out.printf("%d / %s / %s\n", wiseSaying.id, wiseSaying.content, wiseSaying.author);
+        }
     }
 
     private void write() {
