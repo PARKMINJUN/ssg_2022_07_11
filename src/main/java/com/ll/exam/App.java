@@ -28,13 +28,20 @@ public class App {
         while ( true ) {
             System.out.printf("명령)");
             String cmd = sc.nextLine();
+            String[] cmdBits = cmd.split("\\?", 2);
 
-            switch(cmd) {
+            String path = cmdBits[0];
+            String queryStr = cmdBits.length == 2 ? cmdBits[1] : null;
+
+            switch(path) {
                 case "등록":
                     write();
                     break ;
                 case "목록":
                     list();
+                    break ;
+                case "삭제":
+                    remove(path,queryStr);
                     break ;
                 case "종료":
                     break outer;    // break만 하면 "종료" 라는 출력문 만 꺼진다 그러므로 outer 라벨을 달아준다.
@@ -42,6 +49,10 @@ public class App {
         }
 
         sc.close();
+    }
+
+    private void remove(String path, String queryStr) {
+        System.out.println("명언을 삭제합니다.");
     }
 
     private void list(){
