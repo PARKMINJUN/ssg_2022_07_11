@@ -41,7 +41,7 @@ public class App {
 
         WiseSaying wiseSaying = new WiseSaying(id, content, author);
 
-        System.out.printf("%d, %s, %s\n", wiseSaying.id, wiseSaying.content, wiseSaying.author);
+        System.out.println(wiseSaying);
 
         System.out.printf("%d번 명언이 등록되었습니다.\n", id);
 
