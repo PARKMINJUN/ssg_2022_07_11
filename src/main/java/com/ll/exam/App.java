@@ -5,8 +5,10 @@ import java.util.Scanner;
 public class App {
     private Scanner sc; // private 한 이유 : 딱히 외부에 노출 될 필요없다.
     // Scanner sc = new Scanner(System.in);    // 상관은 없지만 보통 스캐너는 생성자로 많이 한다.
+    private int wiseSayingsLastId;
     App() {
         sc = new Scanner(System.in);
+        wiseSayingsLastId = 0;
     }
 
     public void run() {     // run은 외부(여기서는 Main) 에서 호출할 수 있어야 하기 때문에 private 하면 안된다.
@@ -31,12 +33,13 @@ public class App {
     }
 
     private void write() {
-        int id = 1;
+        int id = ++wiseSayingsLastId;   // 처음에 0이지만 ++이 붙으면서 1로 시작
         System.out.printf("명언 : ");
         String content = sc.nextLine();
         System.out.printf("작가 : ");
         String author = sc.nextLine();
 
         System.out.printf("%d번 명언이 등록되었습니다.\n", id);
+
     }
 }
