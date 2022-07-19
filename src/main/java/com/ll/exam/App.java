@@ -28,46 +28,58 @@ public class App {
         while ( true ) {
             System.out.printf("명령)");
             String cmd = sc.nextLine();
-            String[] cmdBits = cmd.split("\\?", 2);
 
-            String path = cmdBits[0];
-            String queryStr = cmdBits.length == 2 ? cmdBits[1] : null;
+//            String[] cmdBits = cmd.split("\\?", 2);                     //
+//                                                                        //    ====> Rq클래스로 이동
+//            String path = cmdBits[0];                                   //
+//            String queryStr = cmdBits.length == 2 ? cmdBits[1] : null;  //
 
-            switch(path) {
+            Rq rq = new Rq(cmd);
+
+            switch (rq.getPath()) {
                 case "등록":
                     write();
-                    break ;
+                    break;
                 case "목록":
                     list();
-                    break ;
+                    break;
                 case "삭제":
-                    remove(path,queryStr);
-                    break ;
+                    remove(rq);
+                    break;
                 case "종료":
-                    break outer;    // break만 하면 "종료" 라는 출력문 만 꺼진다 그러므로 outer 라벨을 달아준다.
+                    break outer;
             }
         }
 
         sc.close();
     }
 
-    private void remove(String path, String queryStr) {
+
+    private void remove(Rq rq) {
         System.out.println("명언을 삭제합니다.");
+
+        int id = rq.getIntParam("id", 0);
+
+        if (id == 0) {
+            System.out.println("id를 입력해주세요.");
+            return;
+        }
+
+        System.out.printf("%d번 명언을 삭제합니다.\n", id);
     }
 
-    private void list(){
-        System.out.println("번호 / 작가 / 명언\n");
+    private void list() {
+        System.out.println("번호 / 작가 / 명언");
         System.out.println("----------------------");
 
-        for (int i = wiseSayings.size() -1; i >= 0; i--) {
+        for (int i = wiseSayings.size() - 1; i >= 0; i--) {
             WiseSaying wiseSaying = wiseSayings.get(i);
-            // System.out.println(wiseSayings);
             System.out.printf("%d / %s / %s\n", wiseSaying.id, wiseSaying.content, wiseSaying.author);
         }
     }
 
     private void write() {
-        int id = ++wiseSayingsLastId;   // 처음에 0이지만 ++이 붙으면서 1로 시작
+        int id = ++wiseSayingsLastId;
         System.out.printf("명언 : ");
         String content = sc.nextLine();
         System.out.printf("작가 : ");
@@ -75,10 +87,8 @@ public class App {
 
         WiseSaying wiseSaying = new WiseSaying(id, content, author);
 
-    //  wiseSaying[0] = wiseSaying;
         wiseSayings.add(wiseSaying);
 
         System.out.printf("%d번 명언이 등록되었습니다.\n", id);
-
     }
 }
